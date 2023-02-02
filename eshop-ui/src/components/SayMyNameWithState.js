@@ -1,4 +1,5 @@
 import React from "react"
+import './SayMyNameWithStateStyle.css'
 
 class SayMyNameWithState extends React.Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class SayMyNameWithState extends React.Component {
         return (
             <>
                 <input onChange={this.setName} value={this.state.name}/>
-                <h3>
+                <h3 className="red">
                     Hello, {this.state.name}!!!
                 </h3>
             </>
