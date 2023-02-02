@@ -4,16 +4,19 @@ class SayMyNameWithState extends React.Component {
     constructor(props) {
         super(props);
         this.state = {name: "Tadas"}
+        // this.setName = this.setName.bind(this)
+    }
+
+    setName = (e) => {
+        console.log("this", this)
+        console.log("e", e)
+        this.setState({name: e.target.value})
     }
 
     render() {
         return (
             <>
-                <input onChange={(e) => {
-                    console.log(e.target.value)
-                    this.setState({name: e.target.value})
-                }
-                }/>
+                <input onChange={this.setName}/>
                 <h3>
                     Hello, {this.state.name}!!!
                 </h3>
