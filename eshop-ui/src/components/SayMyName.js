@@ -1,5 +1,3 @@
-function SayMyName() {
+export default function SayMyName() {
     return <h1>Hello, World!!!</h1>
 }
-
-export default SayMyName
