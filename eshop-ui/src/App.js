@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import SayMyName from './components/SayMyName'
+import SayMyNameWithState from "./components/SayMyNameWithState";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <SayMyName name="Tadas" />
+        <hr/>
+        <SayMyNameWithState/>
         <a
           className="App-link"
           href="https://reactjs.org"
