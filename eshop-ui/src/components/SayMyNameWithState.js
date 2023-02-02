@@ -16,7 +16,7 @@ class SayMyNameWithState extends React.Component {
     render() {
         return (
             <>
-                <input onChange={this.setName}/>
+                <input onChange={this.setName} value={this.state.name}/>
                 <h3>
                     Hello, {this.state.name}!!!
                 </h3>
