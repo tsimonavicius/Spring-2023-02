@@ -1,6 +1,6 @@
-const SayMyName = () => (
+const SayMyName = (props) => (
     <h1>
-        Hello, World!!!
+        Hello, {props.name}!!!
     </h1>
 )
 
