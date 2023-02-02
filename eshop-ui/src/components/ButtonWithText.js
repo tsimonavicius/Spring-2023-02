@@ -1,8 +1,23 @@
-const ButtonWithText = (props) => (
-    <>
-        <p>{props.text}</p>
-        <button>Paspausk</button>
-    </>
-)
+import React from "react";
+
+class ButtonWithText extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = { counter: 0 }
+    }
+
+    count = (e) => {
+        this.setState({ counter: this.state.counter + 1 })
+    }
+
+    render() {
+        return (
+            <>
+                <p>{this.state.counter ? this.state.counter : this.props.text }</p>
+                <button onClick={this.count}>Paspausk</button>
+            </>
+        )
+    }
+}
 
 export default ButtonWithText
