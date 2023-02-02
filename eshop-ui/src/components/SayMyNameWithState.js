@@ -9,7 +9,11 @@ class SayMyNameWithState extends React.Component {
     render() {
         return (
             <>
-                <input />
+                <input onChange={(e) => {
+                    console.log(e.target.value)
+                    this.setState({name: e.target.value})
+                }
+                }/>
                 <h3>
                     Hello, {this.state.name}!!!
                 </h3>
