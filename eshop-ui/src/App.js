@@ -3,6 +3,7 @@ import './App.css';
 import SayMyName from './components/SayMyName'
 import SayMyNameWithState from "./components/SayMyNameWithState";
 import ButtonWithText from "./components/ButtonWithText";
+import SayMyNameUncontrolled from "./components/SayMyNameUncontrolled";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <SayMyNameWithState/>
         <hr/>
         <ButtonWithText text="Nepaspaustas"/>
+        <hr/>
+        <SayMyNameUncontrolled name="Vardenis"/>
         <a
           className="App-link"
           href="https://reactjs.org"
