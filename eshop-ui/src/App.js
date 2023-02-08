@@ -5,6 +5,7 @@ import SayMyNameWithState from "./components/SayMyNameWithState";
 import ButtonWithText from "./components/ButtonWithText";
 import SayMyNameUncontrolled from "./components/SayMyNameUncontrolled";
 import SayMyNameWithStateWithHooks from "./components/SayMyNameWithStateWithHooks";
+import ButtonWithTextWithHooks from "./components/ButtonWithTextWithHooks";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
         <SayMyNameUncontrolled name="Vardenis"/>
         <hr/>
         <SayMyNameWithStateWithHooks/>
+        <hr/>
+        <ButtonWithTextWithHooks text="Paspausk"/>
         <a
           className="App-link"
           href="https://reactjs.org"
