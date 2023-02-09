@@ -20,31 +20,11 @@ const ProductForm = () => {
 
         let objectWithChangedField;
 
-        if (e.target.name === 'name') {
-            objectWithChangedField = {
-                name: e.target.value
-            }
-        }
 
-        if (e.target.name === 'description') {
-            objectWithChangedField = {
-                description: e.target.value
-            }
-        }
 
-        if (e.target.name === 'quantity') {
-            objectWithChangedField = {
-                quantity: e.target.value
-            }
-        }
-
-        if (e.target.name === 'price') {
-            objectWithChangedField = {
-                price: e.target.value
-            }
-        }
-
-        const newProduct = Object.assign({}, product, objectWithChangedField)
+        const newProduct = Object.assign({}, product, {
+            [e.target.name]: e.target.value //  [e.target.name] = "name" || "description" || "quantity" || "price"
+        })
 
         setProduct(newProduct)
     }
