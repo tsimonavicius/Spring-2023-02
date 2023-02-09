@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,17 +30,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private List<ProductDto> mapToDto(Collection<Product> entities) {
-        List<ProductDto> result = new ArrayList<>();
-        for (Product product : entities) {
+        return entities.stream()
+                .map(o -> ProductDto.builder()
+                        .name(o.getName())
+                        .uniqueId(o.getUniqueId())
+                        .price(o.getPrice())
+                        .build())
+                .collect(Collectors.toList());
 
-            ProductDto dataTransferObj = new ProductDto();
-            dataTransferObj.setName(product.getName());
-            dataTransferObj.setUniqueId(product.getUniqueId());
-            dataTransferObj.setPrice(product.getPrice());
-
-            result.add(dataTransferObj);
-
-        }
-        return result;
+        //TODO FOR REFERENCE
+//        List<ProductDto> result = new ArrayList<>();
+//        for (Product product : entities) {
+//
+//            ProductDto dataTransferObj = new ProductDto();
+//            dataTransferObj.setName(product.getName());
+//            dataTransferObj.setUniqueId(product.getUniqueId());
+//            dataTransferObj.setPrice(product.getPrice());
+//
+//            result.add(dataTransferObj);
+//
+//        }
+//        return result;
     }
 }
