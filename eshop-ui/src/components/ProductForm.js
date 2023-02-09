@@ -17,16 +17,10 @@ const ProductForm = () => {
 
         console.log("field name", e.target.name)
 
-
-        let objectWithChangedField;
-
-
-
-        const newProduct = Object.assign({}, product, {
-            [e.target.name]: e.target.value //  [e.target.name] = "name" || "description" || "quantity" || "price"
+        setProduct({
+            ...product,
+            [e.target.name]: e.target.value
         })
-
-        setProduct(newProduct)
     }
 
     return (
