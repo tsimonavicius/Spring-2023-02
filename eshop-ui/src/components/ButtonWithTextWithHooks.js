@@ -2,7 +2,15 @@ import React, {useState} from "react";
 
 const ButtonWithTextWithHooks = (props) => {
 
-    const [counter, setCounter] = useState(0)
+    const veryPriceyCalculations = () => {
+        console.log("Init reiksmes skaiciavimas")
+
+        return 0
+    }
+
+    const [counter, setCounter] = useState(() => veryPriceyCalculations())
+
+    console.log("Rendering component")
 
     const count = (e) => {
         setCounter(prevCounter => prevCounter + 1)
