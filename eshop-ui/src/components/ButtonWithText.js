@@ -14,7 +14,7 @@ class ButtonWithText extends React.Component {
         return (
             <>
                 <p>{this.state.counter ? this.state.counter : this.props.text }</p>
-                <button onClick={this.count}>Paspausk</button>
+                <button onClick={this.count} className="btn btn-primary">Paspausk</button>
             </>
         )
     }
