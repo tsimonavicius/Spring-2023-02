@@ -2,13 +2,7 @@ import React, {useState} from "react";
 
 const ButtonWithTextWithHooks = (props) => {
 
-    const veryPriceyCalculations = () => {
-        console.log("Init reiksmes skaiciavimas")
-
-        return 0
-    }
-
-    const [counter, setCounter] = useState(() => veryPriceyCalculations())
+    const [counter, setCounter] = useState(() => Math.floor(Math.random() * 16))
 
     console.log("Rendering component")
 
