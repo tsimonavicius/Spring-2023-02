@@ -6,6 +6,7 @@ import ButtonWithText from "./components/ButtonWithText";
 import SayMyNameUncontrolled from "./components/SayMyNameUncontrolled";
 import SayMyNameWithStateWithHooks from "./components/SayMyNameWithStateWithHooks";
 import ButtonWithTextWithHooks from "./components/ButtonWithTextWithHooks";
+import ProductForm from "./components/ProductForm";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         >
           Learn React
         </a>
+        <ProductForm/>
       </header>
     </div>
   );
