@@ -13,6 +13,12 @@ function Home() {
     );
 }
 
+function NotFound() {
+    return (
+        <h1>404!!!</h1>
+    );
+}
+
 export default () => (
     <BrowserRouter>
         <div>
@@ -25,6 +31,7 @@ export default () => (
             <Routes>
                 <Route path="/about" element={<About/>}/>
                 <Route path="/" element={<Home/>}/>
+                <Route path="/*" element={<NotFound/>}/>
             </Routes>
         </div>
     </BrowserRouter>
