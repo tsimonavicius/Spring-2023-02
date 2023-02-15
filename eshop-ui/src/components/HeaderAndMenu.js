@@ -11,8 +11,6 @@ import {useState} from "react";
 
 const drawerWidth = 240;
 
-
-
 const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
     ({theme, open}) => ({
         '& .MuiDrawer-paper': {

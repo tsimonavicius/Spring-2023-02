@@ -8,7 +8,7 @@ import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import * as React from "react";
 
-const Header = (props) => {
+const Header = ({drawerWidth, open, toggleDrawer}) => {
 
     const AppBar = styled(MuiAppBar, {
         shouldForwardProp: (prop) => prop !== 'open',
@@ -19,8 +19,8 @@ const Header = (props) => {
             duration: theme.transitions.duration.leavingScreen,
         }),
         ...(open && {
-            marginLeft: props.drawerWidth,
-            width: `calc(100% - ${props.drawerWidth}px)`,
+            marginLeft: drawerWidth,
+            width: `calc(100% - ${drawerWidth}px)`,
             transition: theme.transitions.create(['width', 'margin'], {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen,
@@ -29,7 +29,7 @@ const Header = (props) => {
     }));
 
     return (
-        <AppBar position="absolute" open={props.open}>
+        <AppBar position="absolute" open={open}>
             <Toolbar
                 sx={{
                     pr: '24px', // keep right padding when drawer closed
@@ -39,10 +39,10 @@ const Header = (props) => {
                     edge="start"
                     color="inherit"
                     aria-label="open drawer"
-                    onClick={props.toggleDrawer}
+                    onClick={toggleDrawer}
                     sx={{
                         marginRight: '36px',
-                        ...(props.open && {display: 'none'}),
+                        ...(open && {display: 'none'}),
                     }}
                 >
                     <MenuIcon/>
