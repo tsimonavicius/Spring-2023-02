@@ -1,10 +1,11 @@
-import AppDashboard from "./components/AppDashboard";
+import AppDashboard from "./components/dashboard/AppDashboard";
+import {BrowserRouter} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <AppDashboard />
-    </div>
+    </BrowserRouter>
   );
 }
 
