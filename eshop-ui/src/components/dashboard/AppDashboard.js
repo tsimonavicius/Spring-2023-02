@@ -1,17 +1,33 @@
 import * as React from 'react';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { red } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+
 import Footer from "./Footer";
 import HeaderAndMenu from "./HeaderAndMenu";
 import Pages from "./Pages";
 
 
-const mdTheme = createTheme();
+const mdTheme = createTheme({
+    palette: {
+        primary: {
+            main: "#12803a",
+        },
+        secondary: {
+            light: red[700],
+            main: "#bdae2b"
+        },
+        myColors: {
+            colorOne: "#291cba",
+            colorTwo: "#3cd6de"
+        }
+    }
+});
 
 function DashboardContent() {
     return (
