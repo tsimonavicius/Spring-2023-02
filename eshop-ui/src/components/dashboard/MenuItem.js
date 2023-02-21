@@ -3,6 +3,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const MenuItem = ({label, icon, link}) => {
 
@@ -17,5 +18,11 @@ const MenuItem = ({label, icon, link}) => {
         </ListItemButton>
     )
 }
+
+MenuItem.propTypes = {
+    label: PropTypes.string,
+    link: PropTypes.string,
+    icon: PropTypes.object,
+};
 
 export default MenuItem
