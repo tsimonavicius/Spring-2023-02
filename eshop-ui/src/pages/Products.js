@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import AddItemModal from "../components/dashboard/AddItemModal";
 
 function createData(name, description, price) {
     return {
@@ -51,7 +52,7 @@ const Products = () => {
                     )}
                 </TableBody>
             </Table>
-            {/*<AddItemModal />*/}
+            <AddItemModal />
         </>
     )
 }
