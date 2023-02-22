@@ -2,6 +2,8 @@ import * as React from "react";
 import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import {useNavigate} from "react-router-dom"
 import AddItemModal from "../components/dashboard/AddItemModal";
+import {getProducts} from "../api/productsApi";
+import {useEffect} from "react";
 
 function createData(id, name, description, price) {
     return {
@@ -33,6 +35,12 @@ const allProducts_dummyData = [
 const Products = () => {
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        getProducts()
+            .then(response=>
+                console.log("Response received!!!", response))
+    })
 
     return (
         <>
