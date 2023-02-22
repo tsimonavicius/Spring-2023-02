@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/products")
+@CrossOrigin("*")
 @Api(tags = {"this is a products controller", "with string array description"})
 public class ProductController {
 
