@@ -1,5 +1,6 @@
 import * as React from "react";
-import {Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {useNavigate} from "react-router-dom"
 import AddItemModal from "../components/dashboard/AddItemModal";
 
 function createData(id, name, description, price) {
@@ -31,6 +32,8 @@ const allProducts_dummyData = [
 
 const Products = () => {
 
+    const navigate = useNavigate()
+
     return (
         <>
             <Table size="small">
@@ -40,6 +43,7 @@ const Products = () => {
                         <TableCell >Kaina</TableCell>
                         <TableCell>Aprašymas</TableCell>
                         <TableCell>Įkėlimo data</TableCell>
+                        <TableCell></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -49,6 +53,11 @@ const Products = () => {
                             <TableCell>{listProduct.price}</TableCell>
                             <TableCell>{listProduct.description}</TableCell>
                             <TableCell><span>{listProduct.addDate.toLocaleDateString()}</span></TableCell>
+                            <TableCell>
+                                <Button variant="contained" onClick={() => navigate(`/products/${listProduct.id}`) }>
+                                    Preview
+                                </Button>
+                            </TableCell>
                         </TableRow>
                     )}
                 </TableBody>

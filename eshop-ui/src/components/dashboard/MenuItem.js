@@ -11,7 +11,7 @@ const MenuItem = ({label, icon, link}) => {
     const location = useLocation()
 
     return (
-        <ListItemButton selected={location.pathname === link}
+        <ListItemButton selected={location.pathname.startsWith(link)}
                         onClick={() => navigate(link)}>
             <ListItemIcon>
                 {icon}
