@@ -3,23 +3,15 @@ import {Button, CircularProgress, Table, TableBody, TableCell, TableHead, TableR
 import {useNavigate} from "react-router-dom"
 import AddItemModal from "../components/dashboard/AddItemModal";
 import {getProducts} from "../api/productsApi";
-import {useEffect, useState} from "react";
+import {useQuery} from "react-query";
 
 const Products = () => {
 
     const navigate = useNavigate()
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        getProducts()
-            .then(products=> {
-                setLoading(false)
-                setProducts(products)
-            })
-    }, [])
+    const {isLoading, data: products} = useQuery('getProducts', getProducts)
 
-    const loadingElement = loading && (
+    const loadingElement = isLoading && (
         <TableRow>
             <TableCell colSpan={5} align="center"><CircularProgress /></TableCell>
         </TableRow>
