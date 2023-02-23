@@ -19,6 +19,12 @@ const Products = () => {
             })
     }, [])
 
+    const loadingElement = loading && (
+        <TableRow>
+            <TableCell colSpan={5} align="center"><CircularProgress /></TableCell>
+        </TableRow>
+    ) // = false | <TableRow...>
+
     return (
         <>
             <Table size="small">
@@ -32,23 +38,21 @@ const Products = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow>
-                        <TableCell colSpan={5} align="center"><CircularProgress /></TableCell>
-                    </TableRow>
-
-                    {/*{products.map((listProduct, i) =>*/}
-                    {/*    <TableRow key={i}>*/}
-                    {/*        <TableCell>{listProduct.name}</TableCell>*/}
-                    {/*        <TableCell>{listProduct.price}</TableCell>*/}
-                    {/*        <TableCell>{listProduct.description}</TableCell>*/}
-                    {/*        <TableCell></TableCell>*/}
-                    {/*        <TableCell>*/}
-                    {/*            <Button variant="contained" onClick={() => navigate(`/products/${listProduct.id}`) }>*/}
-                    {/*                Preview*/}
-                    {/*            </Button>*/}
-                    {/*        </TableCell>*/}
-                    {/*    </TableRow>*/}
-                    {/*)}*/}
+                    {
+                        loadingElement || products.map((listProduct, i) =>
+                            <TableRow key={i}>
+                                <TableCell>{listProduct.name}</TableCell>
+                                <TableCell>{listProduct.price}</TableCell>
+                                <TableCell>{listProduct.description}</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell>
+                                    <Button variant="contained" onClick={() => navigate(`/products/${listProduct.id}`) }>
+                                        Preview
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        )
+                    }
                 </TableBody>
             </Table>
             <AddItemModal />
