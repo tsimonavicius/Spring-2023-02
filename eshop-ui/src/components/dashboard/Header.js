@@ -7,8 +7,13 @@ import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import * as React from "react";
+import {AccountCircle} from "@mui/icons-material";
+import {useNavigate} from "react-router-dom";
+import {Button} from "@mui/material";
 
 const Header = ({drawerWidth, open, toggleDrawer}) => {
+
+    const navigate = useNavigate()
 
     const AppBar = styled(MuiAppBar, {
         shouldForwardProp: (prop) => prop !== 'open',
@@ -61,6 +66,14 @@ const Header = ({drawerWidth, open, toggleDrawer}) => {
                         <NotificationsIcon/>
                     </Badge>
                 </IconButton>
+                <Button variant="contained" startIcon={<AccountCircle />}
+                        onClick={() => navigate('/signup')}
+                        color="secondary"
+                        sx={{
+                            ml: 1
+                        }}>
+                    Sign Up
+                </Button>
             </Toolbar>
         </AppBar>
     )

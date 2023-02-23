@@ -3,6 +3,7 @@ import Home from "../../pages/Home";
 import About from "../../pages/About";
 import Products from "../../pages/Products";
 import Product from "../../pages/Product";
+import Signup from "../../pages/Signup";
 
 const Pages = () => (
     <Routes>
@@ -10,6 +11,7 @@ const Pages = () => (
         <Route path="/about" element={<About />}/>
         <Route path="/products" element={<Products />}/>
         <Route path="/products/:id" element={<Product />}/>
+        <Route path="/signup" element={<Signup />}/>
     </Routes>
 )
 
