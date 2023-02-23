@@ -2,14 +2,13 @@ import * as React from "react";
 import {Button, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import {useNavigate} from "react-router-dom"
 import AddItemModal from "../components/dashboard/AddItemModal";
-import {getProducts} from "../api/productsApi";
-import {useQuery} from "react-query";
+import {useProducts} from "../api/productsApi";
 
 const Products = () => {
 
     const navigate = useNavigate()
 
-    const {isLoading, data: products} = useQuery('getProducts', getProducts)
+    const {isLoading, products} = useProducts()
 
     const loadingElement = isLoading && (
         <TableRow>

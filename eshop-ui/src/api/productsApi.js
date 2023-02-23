@@ -1,4 +1,5 @@
 import HTTP from "./"
+import {useQuery} from "react-query";
 
 // http://localhost:8080/products/all
 const getProducts = () => HTTP.get("/products/all")
@@ -10,4 +11,9 @@ const getProducts = () => HTTP.get("/products/all")
 // http://localhost:8080/products/create
 const createProduct = (product) => HTTP.post("/products/create", product)
 
-export { getProducts, createProduct }
+const useProducts = () => {
+    const context = useQuery('getProducts', getProducts)
+    return {...context, products: context.data}
+}
+
+export { createProduct, useProducts }
