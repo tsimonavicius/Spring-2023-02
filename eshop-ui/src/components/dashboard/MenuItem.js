@@ -5,13 +5,13 @@ import * as React from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import PropTypes from 'prop-types';
 
-const MenuItem = ({label, icon, link}) => {
+const MenuItem = ({label, icon, link, matchSubPaths = false}) => {
 
     const navigate = useNavigate();
     const location = useLocation()
 
     return (
-        <ListItemButton selected={location.pathname.startsWith(link)}
+        <ListItemButton selected={matchSubPaths ? location.pathname.startsWith(link) : location.pathname === link}
                         onClick={() => navigate(link)}>
             <ListItemIcon>
                 {icon}
@@ -25,6 +25,7 @@ MenuItem.propTypes = {
     label: PropTypes.string,
     link: PropTypes.string,
     icon: PropTypes.object,
+    matchSubPaths: PropTypes.bool
 };
 
 export default MenuItem

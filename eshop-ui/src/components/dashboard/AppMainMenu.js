@@ -6,7 +6,7 @@ import MenuItem from "./MenuItem";
 export const AppMainMenu = (
     <>
         <MenuItem label="Home" link="/" icon={<Home/>}/>
-        <MenuItem label="Products" link="/products" icon={<AppleIcon/>}/>
+        <MenuItem label="Products" matchSubPaths link="/products" icon={<AppleIcon/>}/>
         <MenuItem label="About" link="/about" icon={<Info/>}/>
     </>
 );
