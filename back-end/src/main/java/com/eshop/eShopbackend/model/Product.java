@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder
@@ -20,17 +17,19 @@ import java.time.LocalDateTime;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "UNIQUE_ID")
+    @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
-    @Column(name = "PRICE")
+    @Column(name = "PRICE", nullable = false)
     private Long price;
 
+    @Column(name = "CREATE_DATE")
     private LocalDateTime createDate = LocalDateTime.now();
 }

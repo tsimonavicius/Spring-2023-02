@@ -3,6 +3,7 @@ package com.eshop.eShopbackend.services;
 import com.eshop.eShopbackend.model.Product;
 import com.eshop.eShopbackend.model.ProductDto;
 import com.eshop.eShopbackend.repositories.ProductRepository;
+import com.eshop.eShopbackend.utils.CoreConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -33,8 +34,9 @@ public class ProductServiceImpl implements ProductService {
         return entities.stream()
                 .map(o -> ProductDto.builder()
                         .name(o.getName())
-                        .uniqueId(o.getUniqueId())
+                        .description(o.getDescription())
                         .price(o.getPrice())
+                        .createDate(o.getCreateDate().format(CoreConstants.DATE_TIME_FORMATTER))
                         .build())
                 .collect(Collectors.toList());
 

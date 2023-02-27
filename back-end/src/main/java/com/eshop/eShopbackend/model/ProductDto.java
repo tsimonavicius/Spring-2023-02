@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductDto { //VIEW
     private String name;
-    private String uniqueId;
+    private String description;
     private Long price;
+    private String createDate;
 }
