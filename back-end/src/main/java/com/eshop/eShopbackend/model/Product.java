@@ -31,5 +31,6 @@ public class Product {
     private Long price;
 
     @Column(name = "CREATE_DATE")
+    @Builder.Default
     private LocalDateTime createDate = LocalDateTime.now();
 }

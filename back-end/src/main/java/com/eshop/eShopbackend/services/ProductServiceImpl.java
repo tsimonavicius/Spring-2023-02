@@ -26,13 +26,23 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String createProduct(ProductDto productDto) {
-        log.info(productDto.toString());//TODO pasidaryt mappinima i entity ir save i db
-        return "success";
+        Product newProduct = buildNewProduct(productDto);
+        productRepository.save(newProduct);
+        return newProduct.getId() != null ? "success" : "failed";
+    }
+
+    private Product buildNewProduct(ProductDto productDto) {
+        return Product.builder()
+                .name(productDto.getName())
+                .description(productDto.getDescription())
+                .price(productDto.getPrice())
+                .build();
     }
 
     private List<ProductDto> mapToDto(Collection<Product> entities) {
         return entities.stream()
                 .map(o -> ProductDto.builder()
+                        .id(o.getId())
                         .name(o.getName())
                         .description(o.getDescription())
                         .price(o.getPrice())

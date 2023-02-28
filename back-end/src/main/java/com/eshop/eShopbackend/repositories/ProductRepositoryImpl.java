@@ -27,4 +27,8 @@ public class ProductRepositoryImpl /*implements ProductRepository*/ {
         String sql = "SELECT * FROM PRODUCT";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
     }
+
+    public void save(Product product) {
+        //insert into product (id, create_date, description, name, price) values (default, ?, ?, ?, ?)
+    }
 }
