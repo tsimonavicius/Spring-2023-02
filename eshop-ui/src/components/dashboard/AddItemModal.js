@@ -24,13 +24,18 @@ const AddItemModal = () => {
 
   const addNewProduct = () => {
     console.log("added something");
-    createProduct({
-      name: name,
-      description: description,
-      price: price,
-    });
+    createProduct(getFormData());
     handleClick();
-    window.location.reload(false);
+    // window.location.reload(false);
+  };
+
+  const getFormData = () => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("imageData", imageData);
+    return formData;
   };
 
   return (

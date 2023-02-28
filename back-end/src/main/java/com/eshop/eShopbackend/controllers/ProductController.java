@@ -5,6 +5,7 @@ import com.eshop.eShopbackend.services.ProductService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,8 +22,16 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+//    @PostMapping("/create")
+//    public String createProduct(@RequestBody ProductDto product) {
+//        return productService.createProduct(product);
+//    }
+
     @PostMapping("/create")
-    public String createProduct(@RequestBody ProductDto product) {
-        return productService.createProduct(product);
+    public String createProduct(@RequestParam("name") String name,
+                                @RequestParam("description") String description,
+                                @RequestParam("price") Long price,
+                                @RequestParam("imageData") MultipartFile imageData) {
+        return productService.createProduct(null);
     }
 }
