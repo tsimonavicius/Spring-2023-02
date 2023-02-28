@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,15 @@ public class ProductController {
     public String createProduct(@RequestParam("name") String name,
                                 @RequestParam("description") String description,
                                 @RequestParam("price") Long price,
-                                @RequestParam("imageData") MultipartFile imageData) {
-        return productService.createProduct(null);
+                                @RequestParam("imageData") MultipartFile imageData) throws IOException {
+        //TODO fileUpload pridet dedikuota endPoint'a ir pakeist onChangeHandler'i
+        ProductDto dto = ProductDto.builder()
+                .name(name)
+                .description(description)
+                .price(price)
+                .imageData(imageData.getBytes())
+                .build();
+
+        return productService.createProduct(dto);
     }
 }

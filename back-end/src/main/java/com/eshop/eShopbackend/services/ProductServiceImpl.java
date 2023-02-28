@@ -1,5 +1,6 @@
 package com.eshop.eShopbackend.services;
 
+import com.eshop.eShopbackend.model.ImageData;
 import com.eshop.eShopbackend.model.Product;
 import com.eshop.eShopbackend.model.ProductDto;
 import com.eshop.eShopbackend.repositories.ProductRepository;
@@ -36,6 +37,13 @@ public class ProductServiceImpl implements ProductService {
                 .name(productDto.getName())
                 .description(productDto.getDescription())
                 .price(productDto.getPrice())
+                .imageData(buildNewImageData(productDto.getImageData()))
+                .build();
+    }
+
+    private ImageData buildNewImageData(byte[] data) {
+        return ImageData.builder()
+                .data(data)
                 .build();
     }
 

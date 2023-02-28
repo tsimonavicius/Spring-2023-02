@@ -33,4 +33,8 @@ public class Product {
     @Column(name = "CREATE_DATE")
     @Builder.Default
     private LocalDateTime createDate = LocalDateTime.now();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "IMAGE_DATA_ID", referencedColumnName = "ID")
+    private ImageData imageData;
 }

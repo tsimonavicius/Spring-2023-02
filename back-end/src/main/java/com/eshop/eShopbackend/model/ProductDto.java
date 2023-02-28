@@ -15,4 +15,5 @@ public class ProductDto { //VIEW
     private String description;
     private Long price;
     private String createDate;
+    private byte[] imageData;
 }
