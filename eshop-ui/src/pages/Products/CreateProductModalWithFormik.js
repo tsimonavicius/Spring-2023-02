@@ -5,9 +5,9 @@ import {
     DialogTitle,
     DialogContent,
     DialogContentText,
-    DialogActions,
+    DialogActions, TextField,
 } from "@mui/material";
-import {Formik} from "formik";
+import {Field, Formik} from "formik";
 import PropState from "../../components/PropState";
 
 const CreateProductModalWithFormik = () => {
@@ -36,14 +36,29 @@ const CreateProductModalWithFormik = () => {
                                 <PropState {...formikProps} />
                                 <DialogContent>
                                     <DialogContentText>Create new Product</DialogContentText>
-                                    <form onSubmit={formikProps.handleSubmit}>
                                         <input name="description"
                                                value={formikProps.values.description}
                                                onChange={formikProps.handleChange}
                                                onBlur={formikProps.handleBlur}
                                         />
-                                    </form>
-                                    {/*<TextField autoFocus margin="dense" id="name" label="Item name" type="text" fullWidth variant="standard" value={name} onChange={(event) => setName(event.target.value)} />*/}
+                                        <TextField id="productName"
+                                                   label="Product Name"
+                                                   name="productName"
+                                                   variant="standard"
+                                                   fullWidth
+                                                   value={formikProps.values.productName}
+                                                   onChange={formikProps.handleChange}
+                                                   onBlur={formikProps.handleBlur}
+                                        />
+                                        <TextField id="price"
+                                                   label="Price"
+                                                   name="price"
+                                                   variant="standard"
+                                                   fullWidth
+                                                   value={formikProps.values.price}
+                                                   onChange={formikProps.handleChange}
+                                                   onBlur={formikProps.handleBlur}
+                                        />
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={null}>Cancel</Button>
