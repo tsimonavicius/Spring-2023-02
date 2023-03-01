@@ -1,17 +1,23 @@
 import * as React from "react";
 import {
+    Alert,
     Button,
+    CircularProgress,
     Dialog,
-    DialogTitle,
+    DialogActions,
     DialogContent,
     DialogContentText,
-    DialogActions, TextField, CircularProgress,
+    DialogTitle, Snackbar,
+    TextField,
 } from "@mui/material";
 import {Field, Formik} from "formik";
-import PropState from "../../components/PropState";
+import {useCreateProduct, useProducts} from "../../api/productsApi";
 
-const CreateProductModalWithFormik = () => {
+const CreateProductModalWithFormik = ({fetchProducts}) => {
     const [open, setOpen] = React.useState(false);
+    const [alertOpen, setAlertOpen] = React.useState(false);
+
+    const createProduct = useCreateProduct()
 
     return (
         <>
@@ -22,12 +28,13 @@ const CreateProductModalWithFormik = () => {
                     productName: '',
                     price: '',
                     description: ''
-                }} onSubmit={(values, { setSubmitting }) => {
+                }} onSubmit={async (product, { setSubmitting }) => {
+                    await createProduct(product)
 
-                    setTimeout(() => {
-                        console.log("submitted values:", values)
-                        setSubmitting(false)
-                    }, 2000)
+                    setSubmitting(false)
+                    setOpen(false)
+                    fetchProducts()
+                    setAlertOpen(true)
                 }}>
                     {({isSubmitting, submitForm}) => (
                             <>
@@ -65,6 +72,14 @@ const CreateProductModalWithFormik = () => {
                     }
                 </Formik>
             </Dialog>
+            <Snackbar open={alertOpen}
+                      anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                      autoHideDuration={6000}
+                      onClose={() => setAlertOpen(false)}>
+                <Alert onClose={() => setAlertOpen(false)} severity="success" sx={{ width: '100%' }}>
+                    Product created!!!
+                </Alert>
+            </Snackbar>
 
             <div style={{marginTop: "10px", textAlign: "center"}}>
                 <Button variant="outlined" onClick={() => setOpen(true)}>

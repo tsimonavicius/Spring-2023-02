@@ -23,10 +23,10 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-//    @PostMapping("/create")
-//    public String createProduct(@RequestBody ProductDto product) {
-//        return productService.createProduct(product);
-//    }
+    @PostMapping
+    public String createProduct(@RequestBody ProductDto product) {
+        return productService.createProduct(product);
+    }
 
     @PostMapping("/create")
     public String createProduct(@RequestParam("name") String name,

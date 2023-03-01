@@ -1,16 +1,15 @@
 import * as React from "react";
 import { Button, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import AddItemModal from "./AddItemModal";
 import { useProducts } from "../../api/productsApi";
 import CreateProductModalWithFormik from "./CreateProductModalWithFormik";
 
 const Products = () => {
   const navigate = useNavigate();
 
-  const { isLoading, products } = useProducts();
+  const { isFetching, products, refetch } = useProducts();
 
-  const loadingElement = isLoading && (
+  const loadingElement = isFetching && (
     <TableRow>
       <TableCell colSpan={5} align="center">
         <CircularProgress />
@@ -48,7 +47,7 @@ const Products = () => {
         </TableBody>
       </Table>
       {/*<AddItemModal />*/}
-        <CreateProductModalWithFormik/>
+        <CreateProductModalWithFormik fetchProducts={refetch}/>
     </>
   );
 };
