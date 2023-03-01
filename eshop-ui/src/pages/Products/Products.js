@@ -3,6 +3,7 @@ import { Button, CircularProgress, Table, TableBody, TableCell, TableHead, Table
 import { useNavigate } from "react-router-dom";
 import AddItemModal from "./AddItemModal";
 import { useProducts } from "../../api/productsApi";
+import CreateProductModalWithFormik from "./CreateProductModalWithFormik";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -46,7 +47,8 @@ const Products = () => {
             ))}
         </TableBody>
       </Table>
-      <AddItemModal />
+      {/*<AddItemModal />*/}
+        <CreateProductModalWithFormik/>
     </>
   );
 };
