@@ -5,7 +5,7 @@ import {
     DialogTitle,
     DialogContent,
     DialogContentText,
-    DialogActions, TextField,
+    DialogActions, TextField, CircularProgress,
 } from "@mui/material";
 import {Field, Formik} from "formik";
 import PropState from "../../components/PropState";
@@ -22,51 +22,47 @@ const CreateProductModalWithFormik = () => {
                     productName: '',
                     price: '',
                     description: ''
-                }} onSubmit={(values, utils) => {
-                    console.log("submit values", values)
-                    console.log("submit utils", utils)
+                }} onSubmit={(values, { setSubmitting }) => {
 
-                    utils.setSubmitting(true);
-                    setTimeout(() => utils.setSubmitting(false), 2000)
+                    setTimeout(() => {
+                        console.log("submitted values:", values)
+                        setSubmitting(false)
+                    }, 2000)
                 }}>
-                    {(formikProps) => {
-                        console.log("formikProps", formikProps)
-                        return (
+                    {({isSubmitting, submitForm}) => (
                             <>
-                                <PropState {...formikProps} />
                                 <DialogContent>
                                     <DialogContentText>Create new Product</DialogContentText>
-                                        <input name="description"
-                                               value={formikProps.values.description}
-                                               onChange={formikProps.handleChange}
-                                               onBlur={formikProps.handleBlur}
+                                        <Field label="Description"
+                                           name="description"
+                                           variant="standard"
+                                           fullWidth
+                                           as={TextField}
                                         />
-                                        <TextField id="productName"
-                                                   label="Product Name"
-                                                   name="productName"
-                                                   variant="standard"
-                                                   fullWidth
-                                                   value={formikProps.values.productName}
-                                                   onChange={formikProps.handleChange}
-                                                   onBlur={formikProps.handleBlur}
+
+                                        <Field label="Product Name"
+                                               name="productName"
+                                               variant="standard"
+                                               fullWidth
+                                               as={TextField}
                                         />
-                                        <TextField id="price"
-                                                   label="Price"
-                                                   name="price"
-                                                   variant="standard"
-                                                   fullWidth
-                                                   value={formikProps.values.price}
-                                                   onChange={formikProps.handleChange}
-                                                   onBlur={formikProps.handleBlur}
+
+                                        <Field label="Price"
+                                           name="price"
+                                           variant="standard"
+                                           fullWidth
+                                           as={TextField}
                                         />
+
+                                    {isSubmitting && <CircularProgress color="inherit" />}
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={null}>Cancel</Button>
-                                    <Button onClick={formikProps.submitForm}>Add</Button>
+                                    <Button onClick={() => setOpen(false)}>Cancel</Button>
+                                    <Button disabled={isSubmitting} onClick={submitForm}>Add</Button>
                                 </DialogActions>
                             </>
                         )
-                    }}
+                    }
                 </Formik>
             </Dialog>
 
