@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Button, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import AddItemModal from "../components/dashboard/AddItemModal";
-import { useProducts } from "../api/productsApi";
+import AddItemModal from "./AddItemModal";
+import { useProducts } from "../../api/productsApi";
 
 const Products = () => {
   const navigate = useNavigate();
