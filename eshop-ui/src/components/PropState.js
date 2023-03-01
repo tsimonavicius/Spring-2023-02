@@ -3,7 +3,7 @@ const PropState = (props) => (
         <h3 style={{fontFamily: 'monospace'}}/>
         <pre
             style={{
-                background: '#000000',
+                background: '#ffffff',
                 fontSize: '1rem',
                 padding: '.5rem',
             }}
