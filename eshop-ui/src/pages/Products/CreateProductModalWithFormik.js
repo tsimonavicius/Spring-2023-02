@@ -11,7 +11,25 @@ import {
     TextField,
 } from "@mui/material";
 import {Field, Formik} from "formik";
-import {useCreateProduct, useProducts} from "../../api/productsApi";
+import {useCreateProduct} from "../../api/productsApi";
+import * as Yup from 'yup'
+import PropState from "../../components/PropState";
+
+
+const productValidationSchema = Yup.object().shape({
+    productName: Yup.string()
+        .min(3, ({label, min}) => `${label} must be greater than ${min} chars`)
+        .max(10)
+        .required()
+        .label("Product name"),
+    price: Yup.number()
+        .positive("Price must be positive")
+        .required(),
+    description: Yup.string()
+        .min(1)
+        .max(255)
+        .required()
+})
 
 const CreateProductModalWithFormik = ({fetchProducts}) => {
     const [open, setOpen] = React.useState(false);
@@ -35,9 +53,11 @@ const CreateProductModalWithFormik = ({fetchProducts}) => {
                     setOpen(false)
                     fetchProducts()
                     setAlertOpen(true)
-                }}>
-                    {({isSubmitting, submitForm}) => (
+                }}
+                validationSchema={productValidationSchema}>
+                    {({isSubmitting, submitForm, ...props}) => (
                             <>
+                                <PropState {...props}/>
                                 <DialogContent>
                                     <DialogContentText>Create new Product</DialogContentText>
                                         <Field label="Description"
