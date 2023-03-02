@@ -55,7 +55,11 @@ const CreateProductModalWithFormik = ({fetchProducts}) => {
                     setAlertOpen(true)
                 }}
                 validationSchema={productValidationSchema}>
-                    {({isSubmitting, submitForm, ...props}) => (
+                    {(props) => {
+
+                        console.log(props)
+
+                        return (
                             <>
                                 <PropState {...props}/>
                                 <DialogContent>
@@ -64,6 +68,8 @@ const CreateProductModalWithFormik = ({fetchProducts}) => {
                                            name="description"
                                            variant="standard"
                                            fullWidth
+                                           error={!!props.errors.description && props.touched.description}
+                                           helperText={props.touched.description && props.errors["description"]}
                                            as={TextField}
                                         />
 
@@ -71,6 +77,8 @@ const CreateProductModalWithFormik = ({fetchProducts}) => {
                                                name="productName"
                                                variant="standard"
                                                fullWidth
+                                               error={!!props.errors.productName && props.touched.productName}
+                                               helperText={props.touched.productName && props.errors["productName"]}
                                                as={TextField}
                                         />
 
@@ -78,17 +86,19 @@ const CreateProductModalWithFormik = ({fetchProducts}) => {
                                            name="price"
                                            variant="standard"
                                            fullWidth
+                                           error={!!props.errors.price && props.touched.price}
+                                           helperText={props.touched.price && props.errors["price"]}
                                            as={TextField}
                                         />
 
-                                    {isSubmitting && <CircularProgress color="inherit" />}
+                                    {props.isSubmitting && <CircularProgress color="inherit" />}
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={() => setOpen(false)}>Cancel</Button>
-                                    <Button disabled={isSubmitting} onClick={submitForm}>Add</Button>
+                                    <Button disabled={props.isSubmitting} onClick={props.submitForm}>Add</Button>
                                 </DialogActions>
                             </>
-                        )
+                        )}
                     }
                 </Formik>
             </Dialog>
