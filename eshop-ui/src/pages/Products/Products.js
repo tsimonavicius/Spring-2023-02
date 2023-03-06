@@ -1,10 +1,15 @@
 import * as React from "react";
-import {Button, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {Button, CircularProgress, IconButton, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {useProducts} from "../../api/productsApi";
 import CreateProductModalWithFormik from "./CreateProductModalWithFormik";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {useContext} from "react";
+import {CartContext} from "../Cart/CartContextProvider";
 
 const Products = () => {
+    const { addProduct } = useContext(CartContext)
+
     const navigate = useNavigate();
 
     const {isFetching, products = [], refetch} = useProducts();
@@ -36,6 +41,13 @@ const Products = () => {
                     <Button variant="contained" onClick={() => navigate(`/products/${listProduct.id}`)}>
                         Preview
                     </Button>
+                    <IconButton onClick={() => addProduct({
+                        id: listProduct.id,
+                        name: listProduct.name,
+                        price: listProduct.price
+                    })}>
+                        <AddShoppingCartIcon/>
+                    </IconButton>
                 </TableCell>
             </TableRow>
         ))
