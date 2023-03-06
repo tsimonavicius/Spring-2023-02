@@ -10,6 +10,7 @@ import * as React from "react";
 import {AccountCircle} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {Button} from "@mui/material";
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 
 const Header = ({drawerWidth, open, toggleDrawer}) => {
 
@@ -61,6 +62,9 @@ const Header = ({drawerWidth, open, toggleDrawer}) => {
                 >
                     E-Shop
                 </Typography>
+                <IconButton color="inherit" onClick={() => navigate('/cart')}>
+                    <ShoppingBasketIcon/>
+                </IconButton>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                         <NotificationsIcon/>
