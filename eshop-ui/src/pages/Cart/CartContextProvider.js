@@ -1,8 +1,9 @@
 import {createContext, useContext, useState} from "react";
+import Decimal from "decimal.js";
 
 const CartContext = createContext(null)
 
-const CartContextProvider = ({ children }) => {
+const CartContextProvider = ({children}) => {
     const [products, setProducts] = useState([])
 
     const cartContextState = {
@@ -20,11 +21,15 @@ const CartContextProvider = ({ children }) => {
 
             setProducts(productsList)
         },
-        getTotalProducts: () => {
-            return products // [{...}, {...}]
+        getTotalQuantity: () => {
+            return products
                 .reduce((sum, product) => sum + product.quantity, 0)
+        },
+        getTotalSum: () => {
+            return products.reduce((sum, product) =>
+                    sum.plus(new Decimal(product.price).mul(product.quantity)),
+                new Decimal(0))
         }
-        // [1, 2, 3].reduce((3, 3) => {return 3 + 3}, 0) == 6
     }
 
     return (
@@ -39,4 +44,4 @@ const useCartContext = () => {
 }
 
 export default CartContextProvider
-export { useCartContext }
+export {useCartContext}

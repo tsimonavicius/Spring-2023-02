@@ -1,12 +1,11 @@
-import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {Button, Table, TableBody, TableCell, TableFooter, TableHead, TableRow} from "@mui/material";
 import * as React from "react";
-import {useContext} from "react";
 import { useCartContext } from "./CartContextProvider";
 import Decimal from "decimal.js";
 
 const Cart = () => {
 
-    const { products } = useCartContext()
+    const { products, getTotalSum } = useCartContext()
 
     const noProductsElement = !products.length && (
         <TableRow>
@@ -46,6 +45,14 @@ const Cart = () => {
             <TableBody>
                 {noProductsElement || productsElement}
             </TableBody>
+            <TableFooter>
+                <TableRow>
+                    <TableCell colSpan={2}/>
+                    <TableCell>Total</TableCell>
+                    <TableCell>{getTotalSum().toString()}</TableCell>
+                    <TableCell></TableCell>
+                </TableRow>
+            </TableFooter>
         </Table>
     )
 }

@@ -16,7 +16,7 @@ import {useCartContext} from "../../pages/Cart/CartContextProvider";
 const Header = ({drawerWidth, open, toggleDrawer}) => {
 
     const navigate = useNavigate()
-    const { getTotalProducts } = useCartContext()
+    const { getTotalQuantity } = useCartContext()
 
     const AppBar = styled(MuiAppBar, {
         shouldForwardProp: (prop) => prop !== 'open',
@@ -65,7 +65,7 @@ const Header = ({drawerWidth, open, toggleDrawer}) => {
                     E-Shop
                 </Typography>
                 <IconButton color="inherit" onClick={() => navigate('/cart')}>
-                    <Badge badgeContent={getTotalProducts()} color="secondary">
+                    <Badge badgeContent={getTotalQuantity()} color="secondary">
                         <ShoppingBasketIcon/>
                     </Badge>
                 </IconButton>
