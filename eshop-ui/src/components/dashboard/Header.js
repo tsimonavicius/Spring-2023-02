@@ -11,10 +11,12 @@ import {AccountCircle} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {Button} from "@mui/material";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import {useCartContext} from "../../pages/Cart/CartContextProvider";
 
 const Header = ({drawerWidth, open, toggleDrawer}) => {
 
     const navigate = useNavigate()
+    const { getTotalProducts } = useCartContext()
 
     const AppBar = styled(MuiAppBar, {
         shouldForwardProp: (prop) => prop !== 'open',
@@ -63,7 +65,9 @@ const Header = ({drawerWidth, open, toggleDrawer}) => {
                     E-Shop
                 </Typography>
                 <IconButton color="inherit" onClick={() => navigate('/cart')}>
-                    <ShoppingBasketIcon/>
+                    <Badge badgeContent={getTotalProducts()} color="secondary">
+                        <ShoppingBasketIcon/>
+                    </Badge>
                 </IconButton>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">

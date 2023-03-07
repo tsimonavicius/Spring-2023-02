@@ -1,12 +1,12 @@
 import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import * as React from "react";
 import {useContext} from "react";
-import { CartContext } from "./CartContextProvider";
+import { useCartContext } from "./CartContextProvider";
 import Decimal from "decimal.js";
 
 const Cart = () => {
 
-    const { products } = useContext(CartContext)
+    const { products } = useCartContext()
 
     const noProductsElement = !products.length && (
         <TableRow>

@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import {createContext, useContext, useState} from "react";
 
 const CartContext = createContext(null)
 
@@ -19,7 +19,12 @@ const CartContextProvider = ({ children }) => {
             }
 
             setProducts(productsList)
+        },
+        getTotalProducts: () => {
+            return products // [{...}, {...}]
+                .reduce((sum, product) => sum + product.quantity, 0)
         }
+        // [1, 2, 3].reduce((3, 3) => {return 3 + 3}, 0) == 6
     }
 
     return (
@@ -29,5 +34,9 @@ const CartContextProvider = ({ children }) => {
     )
 }
 
+const useCartContext = () => {
+    return useContext(CartContext)
+}
+
 export default CartContextProvider
-export { CartContext }
+export { useCartContext }
