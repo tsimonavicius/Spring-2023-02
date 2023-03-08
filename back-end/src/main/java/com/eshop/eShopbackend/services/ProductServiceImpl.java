@@ -34,6 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
     private Product buildNewProduct(ProductDto productDto) {
         return Product.builder()
+                .id(productDto.getId())
                 .name(productDto.getName())
                 .description(productDto.getDescription())
                 .price(productDto.getPrice())
