@@ -13,6 +13,7 @@ const Products = () => {
     const navigate = useNavigate();
     const {isFetching, products = [], refetch} = useProducts();
     const [openProductModal, setOpenProductModal] = useState(false)
+    const [editProduct, setEditProduct] = useState(null)
 
     const loadingElement = isFetching && (
         <TableRow>
@@ -48,7 +49,10 @@ const Products = () => {
                     })}>
                         <AddShoppingCartIcon/>
                     </IconButton>
-                    <IconButton onClick={() => setOpenProductModal(true)}>
+                    <IconButton onClick={() => {
+                        setOpenProductModal(true)
+                        setEditProduct(listProduct)
+                    }}>
                         <EditIcon/>
                     </IconButton>
                 </TableCell>
@@ -76,10 +80,14 @@ const Products = () => {
             <CreateProductModalWithFormik fetchProducts={refetch}
                                           open={openProductModal}
                                           onClose={() => setOpenProductModal(false)}
+                                          product={editProduct}
             />
 
             <div style={{marginTop: "10px", textAlign: "center"}}>
-                <Button variant="outlined" onClick={() => setOpenProductModal(true)}>
+                <Button variant="outlined" onClick={() => {
+                    setOpenProductModal(true)
+                    setEditProduct(null)
+                }}>
                     Add new product
                 </Button>
             </div>

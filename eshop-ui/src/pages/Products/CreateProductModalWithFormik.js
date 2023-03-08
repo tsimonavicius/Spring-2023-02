@@ -31,73 +31,80 @@ const productValidationSchema = Yup.object().shape({
         .required()
 })
 
-const CreateProductModalWithFormik = ({fetchProducts, open, onClose}) => {
+const CreateProductModalWithFormik = ({fetchProducts, open, onClose, product}) => {
     const [alertOpen, setAlertOpen] = React.useState(false);
-
     const createProduct = useCreateProduct()
+
+    const initialValues = product ? {
+        id: product.id,
+        productName: product.name,
+        price: product.price,
+        description: product.description
+    } : {
+        id: null,
+        productName: '',
+        price: '',
+        description: ''
+    }
+
+    const title = product ? "Edit product" : "Create new product"
 
     return (
         <>
             <Dialog open={open} onClose={onClose}>
-                <DialogTitle>Add new item</DialogTitle>
+                <DialogTitle>{title}</DialogTitle>
 
-                <Formik initialValues={{
-                    productName: '',
-                    price: '',
-                    description: ''
-                }} onSubmit={async (product, { setSubmitting }) => {
-                    await createProduct(product)
+                <Formik initialValues={initialValues}
+                        onSubmit={async (product, {setSubmitting}) => {
+                            await createProduct(product)
 
-                    setSubmitting(false)
-                    onClose()
-                    fetchProducts()
-                    setAlertOpen(true)
-                }}
-                validationSchema={productValidationSchema}>
+                            setSubmitting(false)
+                            onClose()
+                            fetchProducts()
+                            setAlertOpen(true)
+                        }}
+                        validationSchema={productValidationSchema}>
                     {(props) => {
-
-                        console.log(props)
-
                         return (
                             <>
-                                <PropState {...props}/>
+                                {/*<PropState {...props}/>*/}
                                 <DialogContent>
-                                    <DialogContentText>Create new Product</DialogContentText>
-                                        <Field label="Description"
+                                    <Field label="Description"
                                            name="description"
                                            variant="standard"
                                            fullWidth
                                            error={!!props.errors.description && props.touched.description}
                                            helperText={props.touched.description && props.errors["description"]}
                                            as={TextField}
-                                        />
+                                    />
 
-                                        <Field label="Product Name"
-                                               name="productName"
-                                               variant="standard"
-                                               fullWidth
-                                               error={!!props.errors.productName && props.touched.productName}
-                                               helperText={props.touched.productName && props.errors["productName"]}
-                                               as={TextField}
-                                        />
+                                    <Field label="Product Name"
+                                           name="productName"
+                                           variant="standard"
+                                           fullWidth
+                                           error={!!props.errors.productName && props.touched.productName}
+                                           helperText={props.touched.productName && props.errors["productName"]}
+                                           as={TextField}
+                                    />
 
-                                        <Field label="Price"
+                                    <Field label="Price"
                                            name="price"
                                            variant="standard"
                                            fullWidth
                                            error={!!props.errors.price && props.touched.price}
                                            helperText={props.touched.price && props.errors["price"]}
                                            as={TextField}
-                                        />
+                                    />
 
-                                    {props.isSubmitting && <CircularProgress color="inherit" />}
+                                    {props.isSubmitting && <CircularProgress color="inherit"/>}
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={onClose}>Cancel</Button>
                                     <Button disabled={props.isSubmitting} onClick={props.submitForm}>Add</Button>
                                 </DialogActions>
                             </>
-                        )}
+                        )
+                    }
                     }
                 </Formik>
             </Dialog>
@@ -105,7 +112,7 @@ const CreateProductModalWithFormik = ({fetchProducts, open, onClose}) => {
                       anchorOrigin={{vertical: 'top', horizontal: 'center'}}
                       autoHideDuration={6000}
                       onClose={() => setAlertOpen(false)}>
-                <Alert onClose={() => setAlertOpen(false)} severity="success" sx={{ width: '100%' }}>
+                <Alert onClose={() => setAlertOpen(false)} severity="success" sx={{width: '100%'}}>
                     Product created!!!
                 </Alert>
             </Snackbar>
