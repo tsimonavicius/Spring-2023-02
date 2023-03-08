@@ -5,7 +5,7 @@ import Decimal from "decimal.js";
 
 const Cart = () => {
 
-    const { products, getTotalSum } = useCartContext()
+    const { products, getTotalSum, removeProduct } = useCartContext()
 
     const noProductsElement = !products.length && (
         <TableRow>
@@ -23,7 +23,7 @@ const Cart = () => {
                 <TableCell>{listProduct.quantity}</TableCell>
                 <TableCell>{new Decimal(listProduct.price).mul(listProduct.quantity).toString()}</TableCell>
                 <TableCell>
-                    <Button variant="contained">
+                    <Button variant="contained" onClick={() => removeProduct(listProduct.id)}>
                         Remove
                     </Button>
                 </TableCell>

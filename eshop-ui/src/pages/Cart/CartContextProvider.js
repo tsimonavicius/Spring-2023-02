@@ -29,6 +29,18 @@ const CartContextProvider = ({children}) => {
             return products.reduce((sum, product) =>
                     sum.plus(new Decimal(product.price).mul(product.quantity)),
                 new Decimal(0))
+        },
+        removeProduct: (id) => {
+            const productsList = [...products]
+            const existingProductIndex = productsList.findIndex(product => product.id === id)
+
+            if (products[existingProductIndex].quantity > 1) {
+                productsList[existingProductIndex].quantity--
+            } else {
+                productsList.splice(existingProductIndex, 1)
+            }
+
+            setProducts(productsList)
         }
     }
 
