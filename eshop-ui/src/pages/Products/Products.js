@@ -4,14 +4,15 @@ import {useNavigate} from "react-router-dom";
 import {useProducts} from "../../api/productsApi";
 import CreateProductModalWithFormik from "./CreateProductModalWithFormik";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import EditIcon from '@mui/icons-material/Edit';
 import {useCartContext} from "../Cart/CartContextProvider";
+import {useState} from "react";
 
 const Products = () => {
-    const { addProduct } = useCartContext()
-
+    const {addProduct} = useCartContext()
     const navigate = useNavigate();
-
     const {isFetching, products = [], refetch} = useProducts();
+    const [openProductModal, setOpenProductModal] = useState(false)
 
     const loadingElement = isFetching && (
         <TableRow>
@@ -47,6 +48,9 @@ const Products = () => {
                     })}>
                         <AddShoppingCartIcon/>
                     </IconButton>
+                    <IconButton onClick={() => setOpenProductModal(true)}>
+                        <EditIcon/>
+                    </IconButton>
                 </TableCell>
             </TableRow>
         ))
@@ -69,7 +73,16 @@ const Products = () => {
                 </TableBody>
             </Table>
             {/*<AddItemModal />*/}
-            <CreateProductModalWithFormik fetchProducts={refetch}/>
+            <CreateProductModalWithFormik fetchProducts={refetch}
+                                          open={openProductModal}
+                                          onClose={() => setOpenProductModal(false)}
+            />
+
+            <div style={{marginTop: "10px", textAlign: "center"}}>
+                <Button variant="outlined" onClick={() => setOpenProductModal(true)}>
+                    Add new product
+                </Button>
+            </div>
         </>
     );
 };

@@ -31,15 +31,14 @@ const productValidationSchema = Yup.object().shape({
         .required()
 })
 
-const CreateProductModalWithFormik = ({fetchProducts}) => {
-    const [open, setOpen] = React.useState(false);
+const CreateProductModalWithFormik = ({fetchProducts, open, onClose}) => {
     const [alertOpen, setAlertOpen] = React.useState(false);
 
     const createProduct = useCreateProduct()
 
     return (
         <>
-            <Dialog open={open} onClose={() => setOpen(false)}>
+            <Dialog open={open} onClose={onClose}>
                 <DialogTitle>Add new item</DialogTitle>
 
                 <Formik initialValues={{
@@ -50,7 +49,7 @@ const CreateProductModalWithFormik = ({fetchProducts}) => {
                     await createProduct(product)
 
                     setSubmitting(false)
-                    setOpen(false)
+                    onClose()
                     fetchProducts()
                     setAlertOpen(true)
                 }}
@@ -94,7 +93,7 @@ const CreateProductModalWithFormik = ({fetchProducts}) => {
                                     {props.isSubmitting && <CircularProgress color="inherit" />}
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={() => setOpen(false)}>Cancel</Button>
+                                    <Button onClick={onClose}>Cancel</Button>
                                     <Button disabled={props.isSubmitting} onClick={props.submitForm}>Add</Button>
                                 </DialogActions>
                             </>
@@ -110,12 +109,6 @@ const CreateProductModalWithFormik = ({fetchProducts}) => {
                     Product created!!!
                 </Alert>
             </Snackbar>
-
-            <div style={{marginTop: "10px", textAlign: "center"}}>
-                <Button variant="outlined" onClick={() => setOpen(true)}>
-                    Add new product
-                </Button>
-            </div>
         </>
     )
 }
