@@ -19,7 +19,7 @@ import PropState from "../../components/PropState";
 const productValidationSchema = Yup.object().shape({
     productName: Yup.string()
         .min(3, ({label, min}) => `${label} must be greater than ${min} chars`)
-        .max(10)
+        .max(50)
         .required()
         .label("Product name"),
     price: Yup.number()
