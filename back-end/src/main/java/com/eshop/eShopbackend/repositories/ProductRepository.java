@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(value = "SELECT * FROM PRODUCT", nativeQuery = true)
+    @Query(value = "SELECT p FROM Product p")
     List<Product> getAllProducts();
 
 }
