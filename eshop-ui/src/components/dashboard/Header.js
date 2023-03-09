@@ -12,10 +12,12 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { useCartContext } from "../../pages/Cart/CartContextProvider";
+import { i18n } from "../../index";
 
 const Header = ({ drawerWidth, open, toggleDrawer }) => {
-  const changeLanguage = () => {
-    console.log("kazkas vyksta");
+  const changeLanguage = (event) => {
+    i18n.changeLanguage(event.target.value);
+    console.log("pakeitem kalba");
   };
 
   const navigate = useNavigate();
@@ -82,7 +84,7 @@ const Header = ({ drawerWidth, open, toggleDrawer }) => {
         >
           Sign Up
         </Button>
-        <select style={{ minHeight: "35px", marginLeft: "7px" }} onChange={changeLanguage}>
+        <select name={i18n.t("language")} style={{ minHeight: "35px", marginLeft: "7px" }} onChange={changeLanguage}>
           <option value="en">English</option>
           <option value="lt">Lietuvių</option>
         </select>

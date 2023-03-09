@@ -1,8 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-const translationEn = { pName: "Product name", pPrice: "Product price", pDesc: "Product desc", pDate: "Creation date" };
-const translationLt = { pName: "Pavadinimas", pPrice: "Kaina", pDesc: "Aprašymas", pDate: "Įkėlimo data" };
+const translationEn = { language: "English", pName: "Product name", pPrice: "Product price", pDesc: "Product desc", pDate: "Creation date", mHome: "Home", mProducts: "Products", mAbout: "About" };
+const translationLt = { language: "Lietuvių", pName: "Pavadinimas", pPrice: "Kaina", pDesc: "Aprašymas", pDate: "Įkėlimo data", mHome: "Pradžia", mProducts: "Produktai", mAbout: "Apie" };
 
 i18n.use(initReactI18next).init({
   resources: {

@@ -7,7 +7,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import EditIcon from "@mui/icons-material/Edit";
 import { useCartContext } from "../Cart/CartContextProvider";
 import { useState } from "react";
-import i18n from "i18next";
+import { i18n } from "../../index";
 
 const Products = () => {
   const { addProduct } = useCartContext();
