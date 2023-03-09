@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(value = "SELECT p FROM Product p")
+    @Query(value = "SELECT p FROM Product p ORDER BY p.price DESC")
     List<Product> getAllProducts();
 
 }
