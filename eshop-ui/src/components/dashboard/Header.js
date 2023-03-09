@@ -1,4 +1,4 @@
-import {styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -7,85 +7,88 @@ import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import * as React from "react";
-import {AccountCircle} from "@mui/icons-material";
-import {useNavigate} from "react-router-dom";
-import {Button} from "@mui/material";
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import {useCartContext} from "../../pages/Cart/CartContextProvider";
+import { AccountCircle } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import { useCartContext } from "../../pages/Cart/CartContextProvider";
 
-const Header = ({drawerWidth, open, toggleDrawer}) => {
+const Header = ({ drawerWidth, open, toggleDrawer }) => {
+  const changeLanguage = () => {
+    console.log("kazkas vyksta");
+  };
 
-    const navigate = useNavigate()
-    const { getTotalQuantity } = useCartContext()
+  const navigate = useNavigate();
+  const { getTotalQuantity } = useCartContext();
 
-    const AppBar = styled(MuiAppBar, {
-        shouldForwardProp: (prop) => prop !== 'open',
-    })(({theme, open}) => ({
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        ...(open && {
-            marginLeft: drawerWidth,
-            width: `calc(100% - ${drawerWidth}px)`,
-            transition: theme.transitions.create(['width', 'margin'], {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-        }),
-    }));
+  const AppBar = styled(MuiAppBar, {
+    shouldForwardProp: (prop) => prop !== "open",
+  })(({ theme, open }) => ({
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(["width", "margin"], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    }),
+  }));
 
-    return (
-        <AppBar position="absolute" open={open}>
-            <Toolbar
-                sx={{
-                    pr: '24px', // keep right padding when drawer closed
-                }}
-            >
-                <IconButton
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={toggleDrawer}
-                    sx={{
-                        marginRight: '36px',
-                        ...(open && {display: 'none'}),
-                    }}
-                >
-                    <MenuIcon/>
-                </IconButton>
-                <Typography
-                    component="h1"
-                    variant="h6"
-                    color="inherit"
-                    noWrap
-                    sx={{flexGrow: 1}}
-                >
-                    E-Shop
-                </Typography>
-                <IconButton color="inherit" onClick={() => navigate('/cart')}>
-                    <Badge badgeContent={getTotalQuantity()} color="secondary">
-                        <ShoppingBasketIcon/>
-                    </Badge>
-                </IconButton>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                        <NotificationsIcon/>
-                    </Badge>
-                </IconButton>
-                <Button variant="contained" startIcon={<AccountCircle />}
-                        onClick={() => navigate('/signup')}
-                        color="secondary"
-                        sx={{
-                            ml: 1
-                        }}>
-                    Sign Up
-                </Button>
-            </Toolbar>
-        </AppBar>
-    )
-}
+  return (
+    <AppBar position="absolute" open={open}>
+      <Toolbar
+        sx={{
+          pr: "24px", // keep right padding when drawer closed
+        }}
+      >
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          onClick={toggleDrawer}
+          sx={{
+            marginRight: "36px",
+            ...(open && { display: "none" }),
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+          E-Shop
+        </Typography>
+        <IconButton color="inherit" onClick={() => navigate("/cart")}>
+          <Badge badgeContent={getTotalQuantity()} color="secondary">
+            <ShoppingBasketIcon />
+          </Badge>
+        </IconButton>
+        <IconButton color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <Button
+          variant="contained"
+          startIcon={<AccountCircle />}
+          onClick={() => navigate("/signup")}
+          color="secondary"
+          sx={{
+            ml: 1,
+          }}
+        >
+          Sign Up
+        </Button>
+        <select style={{ minHeight: "35px", marginLeft: "7px" }} onChange={changeLanguage}>
+          <option value="en">English</option>
+          <option value="lt">Lietuvių</option>
+        </select>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
-export default Header
-
+export default Header;
