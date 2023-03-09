@@ -7,7 +7,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import EditIcon from "@mui/icons-material/Edit";
 import { useCartContext } from "../Cart/CartContextProvider";
 import { useState } from "react";
-import { i18n } from "../../index";
+import { Translation } from "react-i18next";
 
 const Products = () => {
   const { addProduct } = useCartContext();
@@ -39,9 +39,14 @@ const Products = () => {
       <TableCell>{listProduct.description}</TableCell>
       <TableCell>{listProduct.createDate}</TableCell>
       <TableCell>
-        <Button variant="contained" onClick={() => navigate(`/products/${listProduct.id}`)}>
-          Preview
-        </Button>
+        <Translation>
+          {(t, { i18n }) => (
+            <Button variant="contained" onClick={() => navigate(`/products/${listProduct.id}`)}>
+              {t("pPreview")}
+            </Button>
+          )}
+        </Translation>
+
         <IconButton
           onClick={() =>
             addProduct({
@@ -66,34 +71,38 @@ const Products = () => {
   ));
 
   return (
-    <>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>{i18n.t("pName")}</TableCell>
-            <TableCell>{i18n.t("pPrice")}</TableCell>
-            <TableCell>{i18n.t("pDesc")}</TableCell>
-            <TableCell>{i18n.t("pDate")}</TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{loadingElement || noProductsElement || productsElement}</TableBody>
-      </Table>
-      {/*<AddItemModal />*/}
-      <CreateProductModalWithFormik fetchProducts={refetch} open={openProductModal} onClose={() => setOpenProductModal(false)} product={editProduct} />
+    <Translation>
+      {(t, { i18n }) => (
+        <>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>{t("pName")}</TableCell>
+                <TableCell>{t("pPrice")}</TableCell>
+                <TableCell>{t("pDesc")}</TableCell>
+                <TableCell>{t("pDate")}</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{loadingElement || noProductsElement || productsElement}</TableBody>
+          </Table>
+          {/*<AddItemModal />*/}
+          <CreateProductModalWithFormik fetchProducts={refetch} open={openProductModal} onClose={() => setOpenProductModal(false)} product={editProduct} />
 
-      <div style={{ marginTop: "10px", textAlign: "center" }}>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            setOpenProductModal(true);
-            setEditProduct(null);
-          }}
-        >
-          Add new product
-        </Button>
-      </div>
-    </>
+          <div style={{ marginTop: "10px", textAlign: "center" }}>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setOpenProductModal(true);
+                setEditProduct(null);
+              }}
+            >
+              Add new product
+            </Button>
+          </div>
+        </>
+      )}
+    </Translation>
   );
 };
 

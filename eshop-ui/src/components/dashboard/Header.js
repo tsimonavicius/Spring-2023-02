@@ -13,6 +13,7 @@ import { Button } from "@mui/material";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { useCartContext } from "../../pages/Cart/CartContextProvider";
 import { i18n } from "../../index";
+import { Translation } from "react-i18next";
 
 const Header = ({ drawerWidth, open, toggleDrawer }) => {
   const changeLanguage = (event) => {
@@ -84,10 +85,20 @@ const Header = ({ drawerWidth, open, toggleDrawer }) => {
         >
           Sign Up
         </Button>
-        <select name={i18n.t("language")} style={{ minHeight: "35px", marginLeft: "7px" }} onChange={changeLanguage}>
-          <option value="en">English</option>
-          <option value="lt">Lietuvių</option>
-        </select>
+        <Translation>
+          {(t, { i18n }) => (
+            <>
+              <select style={{ minHeight: "35px", marginLeft: "7px" }} onChange={changeLanguage}>
+                <option value="en" selected={t("language") == "en"}>
+                  English
+                </option>
+                <option value="lt" selected={t("language") === "lt"}>
+                  Lietuvių
+                </option>
+              </select>
+            </>
+          )}
+        </Translation>
       </Toolbar>
     </AppBar>
   );
