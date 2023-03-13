@@ -9,8 +9,9 @@ const Cart = () => {
   const [buyBtnDisabled, setBuyBtnDisabled] = React.useState(true);
 
   React.useEffect(() => {
-    setBuyBtnDisabled(false);
-  }, []);
+    const value = products.length === 0;
+    setBuyBtnDisabled(value);
+  }, [products]);
 
   const buyProductsHandler = () => {
     console.log("nupirkom kazka");
