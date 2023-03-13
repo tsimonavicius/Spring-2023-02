@@ -3,18 +3,26 @@ import * as React from "react";
 import { useCartContext } from "./CartContextProvider";
 import Decimal from "decimal.js";
 
+const BUY_BTN_CONST = "BUY_BTN_CONST";
+const buyBtnReducer = (state, action) => {
+  if (action.type === BUY_BTN_CONST) {
+    return action.isDisabled;
+  }
+  return state;
+};
+
 const Cart = () => {
   const { products, getTotalSum, removeProduct } = useCartContext();
 
-  const [buyBtnDisabled, setBuyBtnDisabled] = React.useState(true);
-
-  React.useEffect(() => {
-    const value = products.length === 0;
-    setBuyBtnDisabled(value);
-  }, [products]);
+  const [buyBtnDisabled, dispatchBuyBtn] = React.useReducer(buyBtnReducer, products.length === 0);
 
   const buyProductsHandler = () => {
     console.log("nupirkom kazka");
+  };
+
+  const productRemoveHandler = (productId) => {
+    const isProductsEmpty = removeProduct(productId);
+    dispatchBuyBtn({ type: BUY_BTN_CONST, isDisabled: isProductsEmpty });
   };
 
   const noProductsElement = !products.length && (
@@ -32,7 +40,7 @@ const Cart = () => {
       <TableCell>{listProduct.quantity}</TableCell>
       <TableCell>{new Decimal(listProduct.price).mul(listProduct.quantity).toString()}</TableCell>
       <TableCell>
-        <Button variant="contained" onClick={() => removeProduct(listProduct.id)}>
+        <Button variant="contained" onClick={() => productRemoveHandler(listProduct.id)}>
           Remove
         </Button>
       </TableCell>
