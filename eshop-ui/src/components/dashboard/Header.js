@@ -88,13 +88,9 @@ const Header = ({ drawerWidth, open, toggleDrawer }) => {
         <Translation>
           {(t, { i18n }) => (
             <>
-              <select style={{ minHeight: "35px", marginLeft: "7px" }} onChange={changeLanguage}>
-                <option value="en" selected={t("language") == "en"}>
-                  English
-                </option>
-                <option value="lt" selected={t("language") === "lt"}>
-                  Lietuvių
-                </option>
+              <select value={t("language") === "en" ? "en" : "lt"} style={{ minHeight: "35px", marginLeft: "7px" }} onChange={changeLanguage}>
+                <option value="en">English</option>
+                <option value="lt">Lietuvių</option>
               </select>
             </>
           )}
