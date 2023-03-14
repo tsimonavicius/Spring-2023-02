@@ -11,9 +11,9 @@ import { AccountCircle } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import { useCartContext } from "../../pages/Cart/CartContextProvider";
 import { i18n } from "../../index";
 import { Translation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const Header = ({ drawerWidth, open, toggleDrawer }) => {
   const changeLanguage = (event) => {
@@ -22,7 +22,7 @@ const Header = ({ drawerWidth, open, toggleDrawer }) => {
   };
 
   const navigate = useNavigate();
-  const { getTotalQuantity } = useCartContext();
+  const totalQuantity = useSelector((state) => state.totalQuantity);
 
   const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open",
@@ -65,7 +65,7 @@ const Header = ({ drawerWidth, open, toggleDrawer }) => {
           E-Shop
         </Typography>
         <IconButton color="inherit" onClick={() => navigate("/cart")}>
-          <Badge badgeContent={getTotalQuantity()} color="secondary">
+          <Badge badgeContent={totalQuantity} color="secondary">
             <ShoppingBasketIcon />
           </Badge>
         </IconButton>

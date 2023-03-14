@@ -5,12 +5,17 @@ import { useProducts } from "../../api/productsApi";
 import CreateProductModalWithFormik from "./CreateProductModalWithFormik";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import EditIcon from "@mui/icons-material/Edit";
-import { useCartContext } from "../Cart/CartContextProvider";
 import { useState } from "react";
 import { Translation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { storeAddProduct } from "../../store/reduxStore";
 
 const Products = () => {
-  const { addProduct } = useCartContext();
+  const dispatch = useDispatch();
+  const addProduct = (product) => {
+    dispatch(storeAddProduct(product));
+  };
+
   const navigate = useNavigate();
   const { isFetching, products = [], refetch } = useProducts();
   const [openProductModal, setOpenProductModal] = useState(false);

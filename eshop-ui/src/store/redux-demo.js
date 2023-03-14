@@ -1,3 +1,6 @@
+/**
+ * @deprecated this whole file is for demo purposes
+ */
 const redux = require("redux");
 
 const INCREMENT = "INCREMENT";
