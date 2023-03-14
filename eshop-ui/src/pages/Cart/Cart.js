@@ -2,7 +2,7 @@ import { Button, Table, TableBody, TableCell, TableFooter, TableHead, TableRow }
 import * as React from "react";
 import Decimal from "decimal.js";
 import { useSelector, useDispatch } from "react-redux";
-import { storeRemoveProduct } from "../../store/reduxStore";
+import { productActions } from "../../store/reduxStore";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Cart = () => {
   };
 
   const productRemoveHandler = (productId) => {
-    dispatch(storeRemoveProduct(productId));
+    dispatch(productActions.removeProduct(productId));
   };
 
   const noProductsElement = !products.length && (
@@ -57,7 +57,7 @@ const Cart = () => {
           <TableRow>
             <TableCell colSpan={2} />
             <TableCell>Total</TableCell>
-            <TableCell>{totalSum.toString()}</TableCell>
+            <TableCell>{totalSum}</TableCell>
             <TableCell></TableCell>
           </TableRow>
         </TableFooter>
