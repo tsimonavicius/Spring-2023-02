@@ -1,12 +1,32 @@
 import { createStore } from "redux";
+import Decimal from "decimal.js";
+
+const createState = (products, totalQuantity, totalSum, cartEmpty) => {
+  return { products: products, totalQuantity: totalQuantity, totalSum: totalSum, cartEmpty: cartEmpty };
+};
 
 const ADD_PRODUCT = "ADD_PRODUCT";
 const REMOVE_PRODUCT = "REMOVE_PRODUCT";
-const initState = { products: [], totalQuantity: 0, totalSum: 0, cartEmpty: true };
+const initState = createState([], 0, 0, true);
 
 const productReducer = (state = initState, action) => {
   console.log(`we in`);
-  //todo prideti likusia logikos dali
+  if (action.type === ADD_PRODUCT) {
+    const currentProducts = [...state.products];
+    const existingProduct = currentProducts.find((pr) => pr.id === action.product.id);
+
+    if (existingProduct) {
+      existingProduct.quantity++;
+    } else {
+      currentProducts.push({ ...action.product, quantity: 1 });
+    }
+    return {
+      products: currentProducts,
+      totalQuantity: currentProducts.reduce((sum, product) => sum + product.quantity, 0),
+      totalSum: currentProducts.reduce((sum, product) => sum.plus(new Decimal(product.price).mul(product.quantity)), new Decimal(0)),
+      cartEmpty: currentProducts === 0,
+    };
+  }
   return state;
 };
 
