@@ -1,7 +1,8 @@
 import { createStore } from "redux";
 
 const ADD_PRODUCT = "ADD_PRODUCT";
-const initState = { products: [] };
+const REMOVE_PRODUCT = "REMOVE_PRODUCT";
+const initState = { products: [], totalQuantity: 0, totalSum: 0, cartEmpty: true };
 
 const productReducer = (state = initState, action) => {
   console.log(`we in`);
@@ -15,4 +16,8 @@ export default reduxStore;
 
 export const storeAddProduct = (product) => {
   return { type: ADD_PRODUCT, product: product };
+};
+
+export const storeRemoveProduct = (productId) => {
+  return { type: REMOVE_PRODUCT, productId: productId };
 };

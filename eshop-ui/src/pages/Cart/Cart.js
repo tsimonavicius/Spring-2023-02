@@ -1,7 +1,8 @@
 import { Button, Table, TableBody, TableCell, TableFooter, TableHead, TableRow } from "@mui/material";
 import * as React from "react";
-import { useCartContext } from "./CartContextProvider";
 import Decimal from "decimal.js";
+import { useSelector, useDispatch } from "react-redux";
+import { storeRemoveProduct } from "../../store/reduxStore";
 
 const BUY_BTN_CONST = "BUY_BTN_CONST";
 const buyBtnReducer = (state, action) => {
@@ -12,17 +13,21 @@ const buyBtnReducer = (state, action) => {
 };
 
 const Cart = () => {
-  const { products, getTotalSum, removeProduct } = useCartContext();
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+  const totalSum = useSelector((state) => state.totalSum);
+  const cartEmpty = useSelector((state) => state.cartEmpty);
 
-  const [buyBtnDisabled, dispatchBuyBtn] = React.useReducer(buyBtnReducer, products.length === 0);
+  const [buyBtnDisabled, dispatchBuyBtn] = React.useReducer(buyBtnReducer, cartEmpty);
 
   const buyProductsHandler = () => {
     console.log("nupirkom kazka");
   };
 
   const productRemoveHandler = (productId) => {
-    const isProductsEmpty = removeProduct(productId);
-    dispatchBuyBtn({ type: BUY_BTN_CONST, isDisabled: isProductsEmpty });
+    dispatch(storeRemoveProduct(productId));
+    //todo fix me (turbut nebeveiks buy btn notify)
+    dispatchBuyBtn({ type: BUY_BTN_CONST, isDisabled: products.length === 0 });
   };
 
   const noProductsElement = !products.length && (
@@ -64,7 +69,7 @@ const Cart = () => {
           <TableRow>
             <TableCell colSpan={2} />
             <TableCell>Total</TableCell>
-            <TableCell>{getTotalSum().toString()}</TableCell>
+            <TableCell>{totalSum.toString()}</TableCell>
             <TableCell></TableCell>
           </TableRow>
         </TableFooter>
