@@ -24,7 +24,24 @@ const productReducer = (state = initState, action) => {
       products: currentProducts,
       totalQuantity: currentProducts.reduce((sum, product) => sum + product.quantity, 0),
       totalSum: currentProducts.reduce((sum, product) => sum.plus(new Decimal(product.price).mul(product.quantity)), new Decimal(0)),
-      cartEmpty: currentProducts === 0,
+      cartEmpty: currentProducts.length === 0,
+    };
+  }
+  if (action.type === REMOVE_PRODUCT) {
+    const currentProducts = [...state.products];
+    const existingProductIndex = currentProducts.findIndex((product) => product.id === action.productId);
+
+    if (currentProducts[existingProductIndex].quantity > 1) {
+      currentProducts[existingProductIndex].quantity--;
+    } else {
+      currentProducts.splice(existingProductIndex, 1);
+    }
+
+    return {
+      products: currentProducts,
+      totalQuantity: currentProducts.reduce((sum, product) => sum + product.quantity, 0),
+      totalSum: currentProducts.reduce((sum, product) => sum.plus(new Decimal(product.price).mul(product.quantity)), new Decimal(0)),
+      cartEmpty: currentProducts.length === 0,
     };
   }
   return state;

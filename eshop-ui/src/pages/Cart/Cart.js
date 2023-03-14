@@ -4,21 +4,11 @@ import Decimal from "decimal.js";
 import { useSelector, useDispatch } from "react-redux";
 import { storeRemoveProduct } from "../../store/reduxStore";
 
-const BUY_BTN_CONST = "BUY_BTN_CONST";
-const buyBtnReducer = (state, action) => {
-  if (action.type === BUY_BTN_CONST) {
-    return action.isDisabled;
-  }
-  return state;
-};
-
 const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const totalSum = useSelector((state) => state.totalSum);
   const cartEmpty = useSelector((state) => state.cartEmpty);
-
-  const [buyBtnDisabled, dispatchBuyBtn] = React.useReducer(buyBtnReducer, cartEmpty);
 
   const buyProductsHandler = () => {
     console.log("nupirkom kazka");
@@ -26,8 +16,6 @@ const Cart = () => {
 
   const productRemoveHandler = (productId) => {
     dispatch(storeRemoveProduct(productId));
-    //todo fix me (turbut nebeveiks buy btn notify)
-    dispatchBuyBtn({ type: BUY_BTN_CONST, isDisabled: products.length === 0 });
   };
 
   const noProductsElement = !products.length && (
@@ -74,7 +62,7 @@ const Cart = () => {
           </TableRow>
         </TableFooter>
       </Table>
-      <Button disabled={buyBtnDisabled} onClick={buyProductsHandler}>
+      <Button disabled={cartEmpty} onClick={buyProductsHandler}>
         BUY PRODUCTS
       </Button>
     </React.Fragment>
