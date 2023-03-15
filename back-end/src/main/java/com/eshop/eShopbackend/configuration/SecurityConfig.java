@@ -1,8 +1,10 @@
 package com.eshop.eShopbackend.configuration;
 
+import org.springframework.boot.autoconfigure.h2.H2ConsoleProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -30,5 +32,12 @@ public class SecurityConfig {
                 ).permitAll();
 
         return http.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer(H2ConsoleProperties properties) {
+        return web -> web
+                .ignoring()
+                .antMatchers(properties.getPath() + "/**");
     }
 }
