@@ -21,6 +21,13 @@ public class SecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+        // Configure endpoints authorization requirements
+        http
+                .authorizeRequests()
+                .antMatchers(
+                        "/products/all"
+                ).permitAll();
+
 
         return http.build();
     }
