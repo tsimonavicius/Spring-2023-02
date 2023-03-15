@@ -1,4 +1,4 @@
-package com.eshop.eShopbackend.model;
+package com.eshop.eShopbackend.controllers.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

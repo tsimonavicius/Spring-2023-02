@@ -1,6 +1,6 @@
 package com.eshop.eShopbackend.controllers;
 
-import com.eshop.eShopbackend.model.ProductDto;
+import com.eshop.eShopbackend.controllers.dto.ProductDto;
 import com.eshop.eShopbackend.services.ProductService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;

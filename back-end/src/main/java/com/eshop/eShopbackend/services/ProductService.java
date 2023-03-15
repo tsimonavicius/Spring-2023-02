@@ -1,6 +1,6 @@
 package com.eshop.eShopbackend.services;
 
-import com.eshop.eShopbackend.model.ProductDto;
+import com.eshop.eShopbackend.controllers.dto.ProductDto;
 
 import java.util.List;
 

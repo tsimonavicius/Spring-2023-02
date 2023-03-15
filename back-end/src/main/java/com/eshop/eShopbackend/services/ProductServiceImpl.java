@@ -2,7 +2,7 @@ package com.eshop.eShopbackend.services;
 
 import com.eshop.eShopbackend.model.ImageData;
 import com.eshop.eShopbackend.model.Product;
-import com.eshop.eShopbackend.model.ProductDto;
+import com.eshop.eShopbackend.controllers.dto.ProductDto;
 import com.eshop.eShopbackend.repositories.ProductRepository;
 import com.eshop.eShopbackend.utils.CoreConstants;
 import lombok.RequiredArgsConstructor;
