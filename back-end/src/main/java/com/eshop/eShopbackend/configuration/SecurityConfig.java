@@ -25,9 +25,9 @@ public class SecurityConfig {
         http
                 .authorizeRequests()
                 .antMatchers(
-                        "/products/all"
+                        "/products/all",
+                        "/login"
                 ).permitAll();
-
 
         return http.build();
     }
