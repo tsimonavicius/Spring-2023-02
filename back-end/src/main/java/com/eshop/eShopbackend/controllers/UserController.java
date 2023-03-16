@@ -5,9 +5,10 @@ import com.eshop.eShopbackend.controllers.dto.LoginResponse;
 import com.eshop.eShopbackend.controllers.dto.UserDto;
 import com.eshop.eShopbackend.model.Role;
 import com.eshop.eShopbackend.model.User;
+import com.eshop.eShopbackend.services.JwtService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,14 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @RestController
 public class UserController {
 
     private final AuthenticationManager authenticationManager;
-
-    public UserController(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
+    private final JwtService jwtService;
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody @Valid LoginRequest loginRequest) {
@@ -40,7 +39,7 @@ public class UserController {
     }
 
     private String generateJwt(User user) {
-        return null;
+        return jwtService.createToken(user);
     }
 
     private User authenticate(LoginRequest loginRequest) {
