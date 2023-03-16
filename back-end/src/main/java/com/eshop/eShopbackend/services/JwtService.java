@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class JwtService {
 
     private long validTimeInMillis = 30 * 60 * 1000;
-    private byte[] secretKey = "mtK3JnJ3zbEsJTJHFFwmZ0VciPulPj9uYTirH8wtm3gNuNlQn818b1nS7s2PqMoZJBNCcV6vEE+rlbYJPZJXVw==".getBytes();
+    private byte[] secretKey = "ZGMmcFxm9xx3kyIkkK1RTE2gRgqlvVPHwxAkWLIRy+S9WVZkI8uyjtyfnf7HVi/rGefakLdTrxrKGZGZeeYyww==".getBytes();
 
     public String createToken(User user) {
 
