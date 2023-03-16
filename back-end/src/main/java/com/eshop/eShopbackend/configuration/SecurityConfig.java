@@ -29,7 +29,11 @@ public class SecurityConfig {
                 .antMatchers(
                         "/products/all",
                         "/login"
-                ).permitAll();
+                ).permitAll()
+
+        // Any other request requires authenticated user
+                .anyRequest()
+                .authenticated();
 
         return http.build();
     }
