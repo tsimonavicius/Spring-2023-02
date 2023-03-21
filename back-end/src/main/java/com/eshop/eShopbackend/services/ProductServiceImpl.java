@@ -9,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,22 +57,15 @@ public class ProductServiceImpl implements ProductService {
                         .name(o.getName())
                         .description(o.getDescription())
                         .price(o.getPrice())
-                        .createDate(o.getCreateDate().format(CoreConstants.DATE_TIME_FORMATTER))
+                        .createDate(buildCreateDateLabel(o.getCreateDate()))
                         .build())
                 .collect(Collectors.toList());
+    }
 
-        //TODO FOR REFERENCE
-//        List<ProductDto> result = new ArrayList<>();
-//        for (Product product : entities) {
-//
-//            ProductDto dataTransferObj = new ProductDto();
-//            dataTransferObj.setName(product.getName());
-//            dataTransferObj.setUniqueId(product.getUniqueId());
-//            dataTransferObj.setPrice(product.getPrice());
-//
-//            result.add(dataTransferObj);
-//
-//        }
-//        return result;
+    private String buildCreateDateLabel(LocalDateTime createDate) {
+        LocalDateTime rawDate = Optional.ofNullable(createDate)
+                .orElseGet(LocalDateTime::now);
+
+        return rawDate.format(CoreConstants.DATE_TIME_FORMATTER);
     }
 }

@@ -1,11 +1,28 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import Decimal from "decimal.js";
 
+const PRODUCTS_KEY = "PRODUCTS_KEY";
+
 const createState = (products, totalQuantity, totalSum, cartEmpty) => {
   return { products: products, totalQuantity: totalQuantity, totalSum: totalSum, cartEmpty: cartEmpty };
 };
 
-const initState = createState([], 0, 0, true);
+const persistToLocalStorage = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
+const retrieveFromLocalStorage = (key) => {
+  return localStorage.getItem(key);
+};
+
+const initState = () => {
+  const rawValue = retrieveFromLocalStorage(PRODUCTS_KEY);
+  if (!rawValue) {
+    return createState([], 0, 0, true);
+  }
+  const retrievedState = JSON.parse(rawValue);
+  return createState(retrievedState.products, retrievedState.totalQuantity, retrievedState.totalSum, retrievedState.cartEmpty);
+};
 
 const productsSlice = createSlice({
   name: "products",
@@ -25,6 +42,7 @@ const productsSlice = createSlice({
       state.totalQuantity = currentProducts.reduce((sum, product) => sum + product.quantity, 0);
       state.totalSum = currentProducts.reduce((sum, product) => sum.plus(new Decimal(product.price).mul(product.quantity)), new Decimal(0)).toString();
       state.cartEmpty = currentProducts.length === 0;
+      persistToLocalStorage(PRODUCTS_KEY, state);
     },
     removeProduct(state, action) {
       const currentProducts = [...state.products];
@@ -40,6 +58,7 @@ const productsSlice = createSlice({
       state.totalQuantity = currentProducts.reduce((sum, product) => sum + product.quantity, 0);
       state.totalSum = currentProducts.reduce((sum, product) => sum.plus(new Decimal(product.price).mul(product.quantity)), new Decimal(0)).toString();
       state.cartEmpty = currentProducts.length === 0;
+      persistToLocalStorage(PRODUCTS_KEY, state);
     },
   },
 });
