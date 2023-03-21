@@ -5,6 +5,7 @@ import com.eshop.eShopbackend.model.Product;
 import com.eshop.eShopbackend.controllers.dto.ProductDto;
 import com.eshop.eShopbackend.repositories.ProductRepository;
 import com.eshop.eShopbackend.utils.CoreConstants;
+import com.eshop.eShopbackend.webServices.RestWebService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ProductServiceImpl implements ProductService {
 
+    private static final String USER_CODE = "2";
+
     private final ProductRepository productRepository;
+    private final RestWebService restWebService;
 
     @Override
     public List<ProductDto> getAllProducts() {
+        restWebService.callRestClient(USER_CODE);
         return mapToDto(productRepository.getAllProducts());
     }
 
