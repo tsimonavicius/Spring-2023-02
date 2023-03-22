@@ -1,13 +1,18 @@
 package com.eshop.eShopbackend.controllers;
 
 import com.eshop.eShopbackend.controllers.dto.ProductDto;
+import com.eshop.eShopbackend.model.User;
 import com.eshop.eShopbackend.services.ProductService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -24,7 +29,10 @@ public class ProductController {
     }
 
     @PostMapping
-    public String createProduct(@RequestBody ProductDto product) {
+    public String createProduct(@RequestBody ProductDto product, Principal principal,
+                                Authentication authentication,
+                                @AuthenticationPrincipal User user) {
+        SecurityContextHolder.getContext().getAuthentication();
         return productService.createProduct(product);
     }
 
