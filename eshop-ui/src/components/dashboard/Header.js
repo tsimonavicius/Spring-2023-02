@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import * as React from "react";
-import { AccountCircle } from "@mui/icons-material";
+import {AccountCircle, Login} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
@@ -74,6 +74,17 @@ const Header = ({ drawerWidth, open, toggleDrawer }) => {
             <NotificationsIcon />
           </Badge>
         </IconButton>
+        <Button
+            variant="contained"
+            startIcon={<Login />}
+            onClick={() => navigate("/login")}
+            color="secondary"
+            sx={{
+              ml: 1,
+            }}
+        >
+          Login
+        </Button>
         <Button
           variant="contained"
           startIcon={<AccountCircle />}
