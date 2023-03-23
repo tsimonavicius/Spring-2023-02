@@ -8,12 +8,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import { Translation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { productActions } from "../../store/slices/cartSlice";
+import { cartActions } from "../../store/slices/cartSlice";
 
 const Products = () => {
   const dispatch = useDispatch();
   const addProduct = (product) => {
-    dispatch(productActions.addProduct(product));
+    dispatch(cartActions.addProduct(product));
   };
 
   const navigate = useNavigate();
