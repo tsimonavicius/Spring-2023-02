@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import {login} from "../api/userApi";
 import {useDispatch} from "react-redux";
 import {userLoggedIn} from "../store/slices/userSlice";
+import {useNavigate} from "react-router-dom";
 
 const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -18,6 +19,7 @@ const loginValidationSchema = Yup.object().shape({
 const Login = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     return (
         <>
@@ -38,10 +40,11 @@ const Login = () => {
 
                         const user = await login(values)
                         console.log("user", user)
-
                         dispatch(userLoggedIn(user))
 
                         setSubmitting(false)
+
+                        navigate("/")
                     }}
                     validationSchema={loginValidationSchema}>
                     {({errors, touched}) => (
