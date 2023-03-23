@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import {Field, Form, Formik} from "formik";
 import * as React from "react";
 import * as Yup from 'yup'
+import {login} from "../api/userApi";
 
 const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -26,8 +27,13 @@ const Login = () => (
                     email: '',
                     password: ''
                 }}
-                onSubmit={(values) => {
-                    console.log(values)
+                onSubmit={async (values, { setSubmitting }) => {
+                    console.log("login data", values)
+
+                    const user = await login(values)
+                    console.log("user", user)
+
+                    setSubmitting(false)
                 }}
                 validationSchema={loginValidationSchema}>
                 {({errors, touched}) => (
