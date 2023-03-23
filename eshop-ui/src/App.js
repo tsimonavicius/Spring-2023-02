@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "react-redux";
-import reduxStore from "./store/reduxStore";
+import store from "./store";
 
 const queryClient = new QueryClient();
 
@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <Provider store={reduxStore}>
+        <Provider store={store}>
           <AppDashboard />
         </Provider>
         <ReactQueryDevtools initialIsOpen={false} />

@@ -8,7 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import { Translation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { productActions } from "../../store/reduxStore";
+import { productActions } from "../../store/slices/cartSlice";
 
 const Products = () => {
   const dispatch = useDispatch();

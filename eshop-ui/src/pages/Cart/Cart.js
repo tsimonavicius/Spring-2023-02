@@ -2,7 +2,7 @@ import { Button, Table, TableBody, TableCell, TableFooter, TableHead, TableRow }
 import * as React from "react";
 import Decimal from "decimal.js";
 import { useSelector, useDispatch } from "react-redux";
-import { productActions } from "../../store/reduxStore";
+import { productActions } from "../../store/slices/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
