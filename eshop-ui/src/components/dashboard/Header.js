@@ -7,13 +7,14 @@ import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import * as React from "react";
-import {AccountCircle, Login} from "@mui/icons-material";
+import {AccountCircle, Login, Logout} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {Button} from "@mui/material";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import {i18n} from "../../index";
 import {Translation} from "react-i18next";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {userLoggedOut} from "../../store/slices/userSlice";
 
 const Header = ({drawerWidth, open, toggleDrawer}) => {
     const changeLanguage = (event) => {
@@ -23,7 +24,8 @@ const Header = ({drawerWidth, open, toggleDrawer}) => {
 
     const navigate = useNavigate();
     const totalQuantity = useSelector((state) => state.totalQuantity);
-    const user = useSelector(({ user }) => user?.userDto);
+    const user = useSelector(({user}) => user?.userDto);
+    const dispatch = useDispatch()
 
     const AppBar = styled(MuiAppBar, {
         shouldForwardProp: (prop) => prop !== "open",
@@ -45,36 +47,54 @@ const Header = ({drawerWidth, open, toggleDrawer}) => {
 
     const loginAndSignUpButtons = !user && (
         <>
-          <Button
-              variant="contained"
-              startIcon={<Login/>}
-              onClick={() => navigate("/login")}
-              color="secondary"
-              sx={{
-                  ml: 1,
-              }}
-          >
-              Login
-          </Button>
-          <Button
-              variant="contained"
-              startIcon={<AccountCircle/>}
-              onClick={() => navigate("/signup")}
-              color="secondary"
-              sx={{
-                ml: 1,
-              }}
-          >
-            Sign Up
-          </Button>
+            <Button
+                variant="contained"
+                startIcon={<Login/>}
+                onClick={() => navigate("/login")}
+                color="secondary"
+                sx={{
+                    ml: 1,
+                }}
+            >
+                Login
+            </Button>
+            <Button
+                variant="contained"
+                startIcon={<AccountCircle/>}
+                onClick={() => navigate("/signup")}
+                color="secondary"
+                sx={{
+                    ml: 1,
+                }}
+            >
+                Sign Up
+            </Button>
         </>
     )
 
-   const userDataComponent = user && (
-       <Typography component="span" variant="subtitle1" color="inherit" noWrap>
-         {user.name + ' ' + user.surname}
-       </Typography>
-   )
+    const logout = () => {
+        dispatch(userLoggedOut())
+        navigate("/")
+    }
+
+    const userDataComponent = user && (
+        <>
+            <Typography component="span" variant="subtitle1" color="inherit" noWrap>
+                {user.name + ' ' + user.surname}
+            </Typography>
+            <Button
+                variant="contained"
+                startIcon={<Logout/>}
+                onClick={logout}
+                color="secondary"
+                sx={{
+                    ml: 1,
+                }}
+            >
+                Logout
+            </Button>
+        </>
+    )
 
     return (
         <AppBar position="absolute" open={open}>
