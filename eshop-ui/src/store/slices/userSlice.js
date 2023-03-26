@@ -16,6 +16,8 @@ const userSlice = createSlice({
     }
 })
 
+export const selectLoggedInUser = state => state.user?.userDto
+
 export default userSlice.reducer
 
 export const { userLoggedIn, userLoggedOut } = userSlice.actions

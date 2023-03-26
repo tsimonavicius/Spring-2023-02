@@ -6,6 +6,8 @@ import Product from "../../pages/Product";
 import Signup from "../../pages/Signup";
 import Cart from "../../pages/Cart/Cart";
 import Login from "../../pages/Login";
+import ProtectedRoute from "./ProtectedRoute";
+import AdminPage from "../../pages/AdminPage";
 
 const Pages = () => (
     <Routes>
@@ -16,6 +18,11 @@ const Pages = () => (
         <Route path="/signup" element={<Signup />}/>
         <Route path="/cart" element={<Cart />}/>
         <Route path="/login" element={<Login />}/>
+        <Route path="/admin" element={
+                <ProtectedRoute roles={["ADMIN"]}>
+                        <AdminPage/>
+                </ProtectedRoute>
+        }/>
     </Routes>
 )
 
