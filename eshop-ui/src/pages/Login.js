@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import {login} from "../api/userApi";
 import {useDispatch} from "react-redux";
 import {userLoggedIn} from "../store/slices/userSlice";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -20,6 +20,7 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const location = useLocation()
 
     return (
         <>
@@ -44,7 +45,8 @@ const Login = () => {
 
                         setSubmitting(false)
 
-                        navigate("/")
+                        // navigate to defined from location or to default index page
+                        navigate(location.state?.from || '/')
                     }}
                     validationSchema={loginValidationSchema}>
                     {({errors, touched}) => (
